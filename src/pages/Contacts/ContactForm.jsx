@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const ContactForm = () => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-    setStatus(""); 
 
     const data = {
       name,
       message,
     };
 
-    const response = await axios.post("https://api.39ortomekteb.info/api/contact/create", data);
+    const response = await axios.post("https://schoolbackend-rrc4.onrender.com/api/contact/create", data);
     
     response.data?.success ? handleSuccess() : handleFailure();
+    setLoading(false);
   };
 
   const handleSuccess = () => {
-    setStatus("Successfully created contact!");
+    toast.success("Отзыв добовлено!");
     clearForm();
   };
 
   const handleFailure = () => {
-    setStatus("Failed to create contact.");
+    toast.error("Failed to create contact.");
   };
 
   const handleWhatsAppSubmit = (e) => {
@@ -41,11 +42,10 @@ export const ContactForm = () => {
     );
 
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-
     window.open(whatsappURL, "_blank");
 
     clearForm();
-    setStatus("Сообщение отправлено через WhatsApp!");
+    toast.info("Сообщение отправлено через WhatsApp!");
   };
 
   const clearForm = () => {
@@ -81,7 +81,7 @@ export const ContactForm = () => {
         </div>
         <div className="form-btns">
           <button type="submit" disabled={loading}>
-            {loading ? "Отправка..." : "Добавить contact"}
+            {loading ? "Отправка..." : "Добавить"}
           </button>
           <button
             type="button"
@@ -92,7 +92,7 @@ export const ContactForm = () => {
           </button>
         </div>
       </form>
-      {status && <p>{status}</p>}
+      <ToastContainer />
     </div>
   );
 };

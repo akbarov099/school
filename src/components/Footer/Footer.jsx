@@ -85,7 +85,7 @@ export const Footer = () => {
           <div className="footer__social-links">
             <div className="footer__icon">
               <a
-                href={"#"}
+                href={"https://www.instagram.com/39shkola70let/?igsh=MXIwYXFjbTN1Zms2cQ%3D%3D"}
                 target="_blank"
                 rel="noopener noreferrer"
               >

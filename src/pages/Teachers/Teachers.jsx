@@ -15,7 +15,7 @@ export const Teachers = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.39ortomekteb.info/api/teachers")
+      .get("https://schoolbackend-rrc4.onrender.com/api/teachers")
       .then((response) => {
         if (response.data.success) {
           setTeachers(response.data.data);
@@ -35,7 +35,7 @@ export const Teachers = () => {
   useEffect(() => {
     const filtered = teachers.filter(
       (teacher) =>
-        teacher.full_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        teacher.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) &&
         teacher.type === "Teacher"
     );
     setFilteredTeachers(filtered);
@@ -45,15 +45,6 @@ export const Teachers = () => {
     if (event.key === "Enter") {
       setSearchTerm(event.target.value); 
     }
-  };
-
-  const handleSearch = () => {
-    const filtered = teachers.filter(
-      (teacher) =>
-        teacher.full_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        teacher.type === "Teacher"
-    );
-    setFilteredTeachers(filtered);
   };
 
   if (loading) {
@@ -86,7 +77,7 @@ export const Teachers = () => {
               onKeyDown={handleKeyPress}
               className="teachers__input"
             />
-            <button className="teachers__search-button" onClick={handleSearch}>Поиск</button>
+            <button className="teachers__search-button" onClick={() => setSearchTerm(searchTerm)}>Поиск</button>
           </div>
         </div>
       </div>
@@ -111,7 +102,7 @@ export const Teachers = () => {
           <div className="teachers__list">
             {filteredTeachers.length > 0 ? (
               filteredTeachers.map((teach) => (
-                <div key={teach._id} className="teacher__card">
+                <div key={teach._id || teach.id} className="teacher__card">
                   <div
                     className="teacher__image"
                     onClick={() => {
@@ -123,7 +114,7 @@ export const Teachers = () => {
                     }}
                   >
                     <img
-                      src={teach.image || "path-to-your-placeholder-image"}
+                      src={teach.image || require("../../assets/images/default-image.jpg")}
                       alt={teach.full_name}
                     />
                     <GrContactInfo className="whatsapp-icon" size={40} />

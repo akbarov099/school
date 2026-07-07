@@ -21,7 +21,7 @@ export const Gallerys = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.39ortomekteb.info/api/gallery")
+      .get("https://schoolbackend-rrc4.onrender.com/api/gallery")
       .then((response) => {
         // Access the image URLs from the response based on the new structure
         const fetchedImages = response.data.data.map((item) => item.image);

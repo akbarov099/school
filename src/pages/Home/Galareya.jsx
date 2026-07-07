@@ -20,7 +20,7 @@ export const Galareya = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.39ortomekteb.info/api/gallery")
+      .get("https://schoolbackend-rrc4.onrender.com/api/gallery")
       .then((response) => {
         const fetchedImages = response.data.data.map((item) => item.image);
         setImages(fetchedImages);

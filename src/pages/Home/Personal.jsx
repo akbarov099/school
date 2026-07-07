@@ -5,6 +5,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 import loadingi from "../../assets/images/loading.svg";
 import notfound from "../../assets/images/not-found.jpeg";
+import oops from "../../assets/images/oops.png";
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -21,7 +22,7 @@ export const Personal = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.39ortomekteb.info/api/teachers")
+      .get("https://schoolbackend-rrc4.onrender.com/api/teachers")
       .then((response) => {
         if (response.data.success) {
           setTeachers(response.data.data);
@@ -43,7 +44,7 @@ export const Personal = () => {
   useEffect(() => {
     const filtered = teachers.filter(
       (teacher) =>
-        teacher.full_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        teacher.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) &&
         teacher.type === "Personal"
     );
     setFilteredTeachers(filtered);
@@ -53,15 +54,6 @@ export const Personal = () => {
     if (event.key === "Enter") {
       setSearchTerm(event.target.value);
     }
-  };
-
-  const handleSearch = () => {
-    const filtered = teachers.filter(
-      (teacher) =>
-        teacher.full_name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        teacher.type === "Personal"
-    );
-    setFilteredTeachers(filtered);
   };
 
   if (loading) {
@@ -94,7 +86,7 @@ export const Personal = () => {
         <div className="personal__list">
           {filteredTeachers.length > 0 ? (
             filteredTeachers.map((teach) => (
-              <div key={teach._id} className="personal__card">
+              <div key={teach._id || teach.id} className="personal__card">
                 <div
                   className="personal__image"
                   onClick={() => {
@@ -106,7 +98,7 @@ export const Personal = () => {
                   }}
                 >
                   <img
-                    src={teach.image || "path-to-your-placeholder-image"}
+                    src={teach.image || require("../../assets/images/default-image.jpg")}
                     alt={teach.full_name}
                   />
                   <GrContactInfo className="whatsapp-icon" size={40} />

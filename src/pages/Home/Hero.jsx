@@ -28,7 +28,7 @@ export const Hero = () => {
                 </button>
               </NavLink>
               <a
-                href="#"
+                href="https://www.instagram.com/39shkola70let/?igsh=MXIwYXFjbTN1Zms2cQ%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
               >

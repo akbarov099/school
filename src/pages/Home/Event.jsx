@@ -17,7 +17,7 @@ export const Event = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.39ortomekteb.info/api/blog")
+      .get("https://schoolbackend-rrc4.onrender.com/api/blog")
       .then((response) => {
         if (response.data.success) {
           const parsedData = response.data.data.map((event) => {

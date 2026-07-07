@@ -6,7 +6,7 @@ export const ContactReviews = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get("https://api.39ortomekteb.info/api/contact").then((response) => {
+    axios.get("https://schoolbackend-rrc4.onrender.com/api/contact").then((response) => {
       if (response.data.success) {
         setReviews(response.data.data); 
       } else {
