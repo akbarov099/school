@@ -99,8 +99,10 @@ export const Event = () => {
 
   if (events.length === 0) {
     return (
-      <div className="no-events">
-        <p>На данный момент нет доступных событий.</p>
+     <div className="container">
+        <div className="no-events">
+          <p>На данный момент нет доступных событий.</p>
+        </div>
       </div>
     );
   }
